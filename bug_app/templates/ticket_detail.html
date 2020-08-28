@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1>Detial page</h1>
+
+
+<div class="card border-info">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h4><span class="badge badge-info"> {{ ticket.id }}</span> {{ ticket }} </h4>
+            </div>
+            <div class="col-md-10">
+                {% for message in messages %}
+                <h4><span class="badge badge-secondary">{{ message }} </span> </h4>
+                {% endfor %}
+            </div>
+            <div class="col-md-2 float-right">
+                <button class="btn btn-info dropdown-toggle float-right" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if ticket.user_ticket_completed == request.user %}
+                    <a class="dropdown-item" href="{% url 'assign_details' ticket.id %}">Reopen Ticket</a>
+
+                    {% elif ticket.user_assigned == request.user %}
+                    <a class="dropdown-item" href="{% url 'edit_page' ticket.id %}">Edit</a>
+                    <a class="dropdown-item" href="{% url 'complete_details' ticket.id %}">Complete</a>
+                    <a class="dropdown-item" href="{% url 'new_ticket__details' ticket.id %}">Return Ticket</a>
+                    <a class="dropdown-item" href="{% url 'invalid_details' ticket.id %}">Mark Ticket as Invalid</a>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'edit_page' ticket.id %}">Edit</a>
+                    <a class="dropdown-item" href="{% url 'assign_details' ticket.id %}">Assign Ticket to You</a>
+                    <a class="dropdown-item" href="{% url 'invalid_details' ticket.id %}">Mark Ticket as Invalid</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th style="width: 30rem;">Info</th>
+                <th style="width: 40rem;">Description</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Status: {{ ticket.status}}</th>
+                <th scope="row">{{ ticket.description }}</th>
+
+            </tr>
+            <tr>
+                <th scope="row">Submitted time: {{ ticket.submit_time}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Reported by: <a
+                        href="{% url 'user_details' ticket.user_filed %}">{{ticket.user_filed}}</a>
+                </th>
+
+            </tr>
+            <tr>
+                {% if ticket.user_ticket_completed %}
+                <th scope="row">Completed by: <a
+                        href="{% url 'user_details' ticket.user_filed %}">{{ticket.user_filed}}</a>
+                </th>
+                {% else %}
+                <th></th>
+                {% endif%}
+
+            </tr>
+        </tbody>
+    </table>
+    {% endblock %}

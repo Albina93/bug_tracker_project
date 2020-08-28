@@ -1,0 +1,202 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<br>
+<br>
+
+<div class="card border-secondary">
+    <div class="card-header">
+        <h3>User details: </h3>
+        <ul>
+            <li>Username: {{ user.user_filed.username }}</li>
+            <li>Bio: {{ user.user_filed.bio }}</li>
+            <li>Email: {{ user.user_filed.email }}</li>
+        </ul>
+    </div>
+</div>
+<br>
+<div class="card border-info">
+    <div class="card-header">
+        Filed Tickets
+    </div>
+
+    <table class="table table-stripped table-blue text-center">
+        <thead class="table table-stripped table-info">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Assigned to</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Time age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in all_ticket %}
+            <tr>
+                <th scope="row">{{ ticket.id }}</th>
+                <td><a href="{% url 'ticket_details' ticket.id %}">{{ ticket.title }}</a></td>
+                {% if ticket.user_assigned == None %}
+                <td></td>
+                {% else %}
+                <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
+                {% endif %}
+                <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
+                <td>{{ ticket.submit_time }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+<div class="card border-info">
+    <div class="card-header">
+        New Tickets
+    </div>
+
+    <table class="table table-stripped table-blue text-center">
+
+
+        <thead class="table table-stripped table-info">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Assigned to</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Time age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in all_ticket %}
+            <tr>
+                {% if ticket.status == "New" %}
+                <th scope="row">{{ ticket.id }}</th>
+                <td><a href="{% url 'ticket_details' ticket.id %}">{{ ticket.title }}</a></td>
+                {% if ticket.user_assigned == None %}
+                <td></td>
+                {% else %}
+                <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
+                {% endif %}
+                <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
+                <td>{{ ticket.submit_time }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<br>
+<div class="card border-info">
+    <div class="card-header">
+        In Progress
+    </div>
+    <table class="table table-stripped table-blue text-center">
+
+        <thead class="table table-stripped table-info">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Assigned to</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Submitted time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in all_ticket %}
+            <tr>
+                {% if ticket.status == "In Progress" %}
+                <th scope="row">{{ ticket.id }}</th>
+                <td><a href="{% url 'ticket_details' ticket.id %}"">{{ ticket.title }}</a></td>
+                {% if ticket.user_assigned == None %}
+                <td></td>
+                {% else %}
+                <td><a href=" {% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
+                {% endif %}
+                <td><a href=" {% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
+                <td>{{ ticket.submit_time }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+<div class=" card border-info">
+    <div class="card-header">
+        Done
+    </div>
+    <table class="table table-stripped table-blue text-center">
+
+        <thead class="table table-stripped table-info">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Assigned to</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Submitted time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in all_ticket %}
+            <tr>
+                {% if ticket.status == "Done" %}
+                <th scope="row">{{ ticket.id }}</th>
+                <td><a href="{% url 'ticket_details' ticket.id %}">{{ ticket.title }}</a></td>
+                {% if ticket.user_assigned == None %}
+                <td></td>
+                {% else %}
+                <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
+                {% endif %}
+                <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
+                <td>{{ ticket.submit_time }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+<div class="card border-info">
+    <div class="card-header">
+        Invalid
+    </div>
+    <table class="table table-stripped table-blue text-center">
+
+        <thead class="table table-stripped table-info">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Assigned to</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Submitted time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in all_ticket %}
+            <tr>
+                {% if ticket.status == "Invalid" %}
+                <th scope="row">{{ ticket.id }}</th>
+                <td><a href="{% url 'ticket_details' ticket.id %}">{{ ticket.title }}</a></td>
+                {% if ticket.user_assigned == None %}
+                <td></td>
+                {% else %}
+                <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
+                {% endif %}
+                <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
+                <td>{{ ticket.submit_time }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
