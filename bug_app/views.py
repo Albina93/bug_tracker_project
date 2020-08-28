@@ -42,7 +42,7 @@ def add_ticket_view(request):
     form = forms.AddTicketForm()
     return render(request, 'generic_form.html', {'form': form})
 
-
+@login_required
 def edit_ticket_view(request, ticket_id):
     ticket = models.TicketModel.objects.get(id=ticket_id)
     if request.method == "POST":
