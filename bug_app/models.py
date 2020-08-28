@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from datetime import  datetime, timezone 
 
 
 class CustomUser(AbstractUser):
@@ -23,6 +24,14 @@ class TicketModel(models.Model):
     status = models.CharField(max_length=20, default='New', choices=STATUS_OF_TICKET_CHOICES)
     user_assigned = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_assigned', null=True)
     user_ticket_completed = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_ticket_completed', null=True)
+
+    @property
+    def age(self):
+        date_submit = self.submit_time
+        current_date = datetime.now(timezone.utc)
+        age_day = current_date - date_submit
+        return age_day.days
+
 
 
     def __str__(self):
