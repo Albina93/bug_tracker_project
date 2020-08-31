@@ -41,7 +41,7 @@
                 <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
                 {% endif %}
                 <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
-                <td>{{ ticket.submit_time }}</td>
+                <td>{{ ticket.age }} days</td>
 
             </tr>
             {% endfor %}
@@ -79,7 +79,7 @@
                 <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
                 {% endif %}
                 <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
-                <td>{{ ticket.submit_time }}</td>
+                <td>{{ ticket.age }} days</td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -102,7 +102,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Assigned to</th>
                 <th scope="col">Created by</th>
-                <th scope="col">Submitted time</th>
+                <th scope="col">Time age</th>
             </tr>
         </thead>
         <tbody>
@@ -117,7 +117,7 @@
                 <td><a href=" {% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
                 {% endif %}
                 <td><a href=" {% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
-                <td>{{ ticket.submit_time }}</td>
+                <td>{{ ticket.age }} days</td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -139,7 +139,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Assigned to</th>
                 <th scope="col">Created by</th>
-                <th scope="col">Submitted time</th>
+                <th scope="col">Time age</th>
             </tr>
         </thead>
         <tbody>
@@ -154,7 +154,7 @@
                 <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
                 {% endif %}
                 <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
-                <td>{{ ticket.submit_time }}</td>
+                <td>{{ ticket.age }} days</td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -176,7 +176,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Assigned to</th>
                 <th scope="col">Created by</th>
-                <th scope="col">Submitted time</th>
+                <th scope="col">Time age</th>
             </tr>
         </thead>
         <tbody>
@@ -191,7 +191,7 @@
                 <td><a href="{% url 'user_details' ticket.user_assigned %}">{{ ticket.user_assigned }}</a></td>
                 {% endif %}
                 <td><a href="{% url 'user_details' ticket.user_filed %}">{{ ticket.user_filed }}</a></td>
-                <td>{{ ticket.submit_time }}</td>
+                <td>{{ ticket.age }} days</td>
                 {% endif %}
             </tr>
             {% endfor %}
